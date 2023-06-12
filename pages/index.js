@@ -1,11 +1,20 @@
-import React from 'react'
+import * as React from "react"
+import Head from "next/head"
+import LoggedInView from "../components/LoggedInView"
+import { useUser } from "../hooks"
 
-const Home = () => {
+function Index() {
+  const { user } = useUser()
+  const title = user ? `Welcome, ${user.name}!` : "Home"
+
   return (
-    <div className='container'>
-      <h1 className="text-center">Welcome to The Profile</h1>
+    <div className="">
+      <Head>
+        <title>{title}</title>
+      </Head>
+      {user ? <LoggedInView /> : "You're not logged in"}
     </div>
   )
 }
 
-export default Home
+export default Index
